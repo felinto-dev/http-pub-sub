@@ -5,7 +5,7 @@ Uma biblioteca NodeJS que permite escutar mensagens via polling de um endpoint H
 ## 🚀 Instalação
 
 ```bash
-npm install https://github.com/felinto-dev/http-pub-sub
+npm install github:felinto-dev/http-pub-sub
 ```
 
 ## ⚙️ Configuração
