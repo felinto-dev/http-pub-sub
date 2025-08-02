@@ -1,0 +1,26 @@
+{
+  "name": "@felintodev/http-pub-sub",
+  "version": "1.0.0",
+  "description": "Uma biblioteca NodeJS para escutar mensagens via polling HTTP",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "http",
+    "polling",
+    "pub-sub",
+    "messages",
+    "nodejs"
+  ],
+  "author": "Felipe Felinto",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/felintodev/http-pub-sub.git"
+  },
+  "dependencies": {}
+}
