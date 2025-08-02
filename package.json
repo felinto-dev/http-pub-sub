@@ -1,5 +1,5 @@
 {
-  "name": "@felintodev/http-pub-sub",
+  "name": "@felinto-dev/http-pub-sub",
   "version": "1.0.0",
   "description": "Uma biblioteca NodeJS para escutar mensagens via polling HTTP",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/felintodev/http-pub-sub.git"
+    "url": "https://github.com/felinto-dev/http-pub-sub.git"
   },
   "dependencies": {}
 }

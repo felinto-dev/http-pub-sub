@@ -1,5 +1,5 @@
 /**
- * @felintodev/http-pub-sub
+ * @felinto-dev/http-pub-sub
  * 
  * Uma biblioteca NodeJS que permite escutar mensagens via polling de um endpoint HTTP
  */
@@ -210,7 +210,7 @@ function makeHttpRequest(url, headers = {}, timeout = 5000) {
       path: parsedUrl.pathname + parsedUrl.search,
       method: 'GET',
       headers: {
-        'User-Agent': '@felintodev/http-pub-sub',
+        'User-Agent': '@felinto-dev/http-pub-sub',
         'Accept': 'application/json',
         ...headers
       },

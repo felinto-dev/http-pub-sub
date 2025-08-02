@@ -1,11 +1,11 @@
-# 📚 @felintodev/http-pub-sub
+# 📚 @felinto-dev/http-pub-sub
 
 Uma biblioteca NodeJS que permite escutar mensagens via polling de um endpoint HTTP definido por variável de ambiente. As mensagens são identificadas por uma chave (ex: e-mail) e podem ser filtradas por tipo.
 
 ## 🚀 Instalação
 
 ```bash
-npm install @felintodev/http-pub-sub
+npm install @felinto-dev/http-pub-sub
 ```
 
 ## ⚙️ Configuração
@@ -24,7 +24,7 @@ HTTP_PUB_SUB_ENDPOINT=https://sua-api.com/messages
 ## 📖 Uso Básico
 
 ```javascript
-const { listenFrom } = require('@felintodev/http-pub-sub');
+const { listenFrom } = require('@felinto-dev/http-pub-sub');
 
 async function exemplo() {
   try {
