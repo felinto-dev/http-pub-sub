@@ -1,6 +1,6 @@
 {
   "name": "@felinto-dev/http-pub-sub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Uma biblioteca NodeJS para escutar mensagens via polling HTTP",
   "main": "index.js",
   "scripts": {
