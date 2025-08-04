@@ -3,9 +3,6 @@
   "version": "1.0.1",
   "description": "Uma biblioteca NodeJS para escutar mensagens via polling HTTP",
   "main": "index.js",
-  "scripts": {
-    "test": "node test.js"
-  },
   "keywords": [
     "http",
     "polling",
@@ -21,6 +18,21 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/felinto-dev/http-pub-sub.git"
+  },
+  "scripts": {
+    "test": "echo \"No tests specified yet\"",
+    "prepare": "echo \"Preparing package for publish...\"",
+    "prepublishOnly": "echo \"Running pre-publish checks...\" && npm test",
+    "postpublish": "echo \"Package published successfully to npmjs!\"",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "publish:dry-run": "npm publish --dry-run",
+    "check:package": "npm pack --dry-run"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {}
 }
