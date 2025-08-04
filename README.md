@@ -29,10 +29,11 @@ const { listenFrom } = require('@felinto-dev/http-pub-sub');
 async function exemplo() {
   try {
     const result = await listenFrom("user+freepikaccount01@gmail.com.noreply@freepik.com", {
-      type: "verification-code",
-      timeout: 60,      // tempo total de espera em segundos
-      retroBack: 60,    // busca mensagens emitidas nos últimos X segundos
-      interval: 10      // intervalo de polling em segundos (padrão: 10)
+      type: "verification-code"
+      // Os seguintes parâmetros são opcionais e têm valores padrão:
+      // timeout: 120,      // tempo total de espera em segundos (padrão: 120)
+      // retroBack: 60,     // busca mensagens emitidas nos últimos X segundos (padrão: 60)
+      // interval: 5        // intervalo de polling em segundos (padrão: 5)
     });
 
     if (result.success) {
@@ -115,11 +116,11 @@ Em caso de timeout:
 const result = await listenFrom("usuario@exemplo.com", {
   // Opções obrigatórias
   type: "verification-code",        // tipo da mensagem a buscar
-  timeout: 60,                      // timeout total em segundos
-  retroBack: 60,                    // buscar mensagens dos últimos X segundos
   
-  // Opções opcionais
-  interval: 10,                     // intervalo de polling (padrão: 10s, mínimo: 1s)
+  // Opções opcionais com valores padrão
+  timeout: 120,                     // timeout total em segundos (padrão: 120)
+  retroBack: 60,                    // buscar mensagens dos últimos X segundos (padrão: 60)
+  interval: 5,                      // intervalo de polling (padrão: 5s, mínimo: 1s)
   debug: true,                      // ativar logs de debug no console
   endpoint: "https://api.custom.com", // override da variável de ambiente
   headers: {                        // headers customizados para autenticação
@@ -145,11 +146,17 @@ const result = await listenFrom("usuario@exemplo.com", {
 
 ### Código de Verificação
 ```javascript
+// Usando valores padrão (timeout: 120s, retroBack: 60s, interval: 5s)
 const codigo = await listenFrom("usuario@gmail.com", {
+  type: "verification-code"
+});
+
+// Ou customizando os valores
+const codigoCustom = await listenFrom("usuario@gmail.com", {
   type: "verification-code",
-  timeout: 120,     // aguarda até 2 minutos
+  timeout: 180,     // aguarda até 3 minutos
   retroBack: 300,   // busca códigos dos últimos 5 minutos
-  interval: 5       // verifica a cada 5 segundos
+  interval: 3       // verifica a cada 3 segundos
 });
 
 if (codigo.success) {
@@ -161,8 +168,7 @@ if (codigo.success) {
 ```javascript
 const link = await listenFrom("admin@empresa.com", {
   type: "login-link",
-  timeout: 60,
-  retroBack: 120,
+  retroBack: 120,   // customiza apenas o retroBack (mantém timeout: 120s e interval: 5s)
   headers: {
     "Authorization": "Bearer " + process.env.API_TOKEN
   },
@@ -178,10 +184,9 @@ if (link.success && typeof link.data === 'object') {
 ```javascript
 const notificacao = await listenFrom("app@sistema.com", {
   type: "push-notification",
-  timeout: 30,
-  retroBack: 60,
+  timeout: 30,     // customiza o timeout (mantém retroBack: 60s)
   endpoint: "https://staging-api.empresa.com/messages", // usar API de staging
-  interval: 2  // polling mais frequente
+  interval: 2      // polling mais frequente
 });
 ```
 
@@ -193,7 +198,7 @@ try {
   // processo normal...
 } catch (error) {
   // Possíveis erros:
-  // - Parâmetros inválidos (key, type, timeout, retroBack obrigatórios)
+  // - Parâmetros inválidos (key e type são obrigatórios)
   // - Endpoint não configurado
   // - Erro de parsing JSON
   // - Problemas críticos de rede

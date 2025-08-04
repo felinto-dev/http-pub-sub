@@ -13,9 +13,9 @@ const { URL } = require('url');
  * @param {string} key - Chave da mensagem (ex: e-mail)
  * @param {Object} options - Opções de configuração
  * @param {string} options.type - Tipo da mensagem
- * @param {number} options.timeout - Tempo total de espera em segundos
- * @param {number} options.retroBack - Busca mensagens emitidas nos últimos X segundos
- * @param {number} [options.interval=10] - Intervalo de polling em segundos
+ * @param {number} [options.timeout=120] - Tempo total de espera em segundos
+ * @param {number} [options.retroBack=60] - Busca mensagens emitidas nos últimos X segundos
+ * @param {number} [options.interval=5] - Intervalo de polling em segundos
  * @param {boolean} [options.debug=false] - Ativar logs de debug
  * @param {string} [options.endpoint] - Override da variável de ambiente
  * @param {Object} [options.headers={}] - Headers customizados
@@ -31,25 +31,26 @@ async function listenFrom(key, options = {}) {
     throw new Error('options.type deve ser uma string não vazia');
   }
 
-  if (!options.timeout || typeof options.timeout !== 'number') {
-    throw new Error('options.timeout deve ser um número maior que 0');
-  }
-
-  if (!options.retroBack || typeof options.retroBack !== 'number') {
-    throw new Error('options.retroBack deve ser um número maior que 0');
-  }
-
   // Configurações padrão
   const config = {
-    interval: options.interval || 10,
+    timeout: options.timeout || 120,
+    retroBack: options.retroBack || 60,
+    interval: options.interval || 5,
     debug: options.debug || false,
     endpoint: options.endpoint || process.env.HTTP_PUB_SUB_ENDPOINT,
     headers: options.headers || {},
     requestTimeout: options.requestTimeout || 5000,
-    type: options.type,
-    timeout: options.timeout,
-    retroBack: options.retroBack
+    type: options.type
   };
+
+  // Validações após aplicar os valores padrão
+  if (typeof config.timeout !== 'number' || config.timeout <= 0) {
+    throw new Error('options.timeout deve ser um número maior que 0');
+  }
+
+  if (typeof config.retroBack !== 'number' || config.retroBack <= 0) {
+    throw new Error('options.retroBack deve ser um número maior que 0');
+  }
 
   if (!config.endpoint) {
     throw new Error('Endpoint HTTP não definido. Configure a variável de ambiente HTTP_PUB_SUB_ENDPOINT ou passe via options.endpoint');
